@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/art-of-sun-vector-png-sun-vector-png-images-pictures-becuo-900.png">
+    <title>City weather</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <header>
+                <div class="headerlogo">
+                    <img src="images/art-of-sun-vector-png-sun-vector-png-images-pictures-becuo-900.png">
+                </div>
+                <div class="headertext">
+                    <a href="index.html">
+                        <h1 class="display-3">city weather</h1>
+                    </a>
+                </div>
+            </header>
+
+            <div class="form-group">
+                <input type="text" @keyup.enter="getData" class="inputfield form-control" v-model="city" placeholder="Enter a city or country">
+            </div>
+            <button type="submit" v-on:click="getData" class="btn btn-primary">Submit</button>
+
+            <div v-if="show">
+                <div class="card card-default weatherresults">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item cityname">
+                                <h1>{{data.city.name}},
+                                    <small> {{data.city.country}}</small>
+                                </h1>
+                                <h4>
+                                    <img :src="'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png'">
+                                    <small>{{data.list[0].weather[0].description}}. The temperature right now is {{Math.round(data.list[0].main.temp)}}°C.</small>
+                                </h4>
+                            </li>
+                            <li class="list-group-item">
+                                <p>Maximum temperature:</p>
+                                    <h3>{{Math.round(data.list[0].main.temp_max)}}°C</h3>
+                            </li>
+                            <li class="list-group-item">
+                                <p>Minimum temperature:</p>
+                                    <h3>{{Math.round(data.list[0].main.temp_min)}}°C</h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="citynotfound" v-if="showempty">
+                <h1 class="display-4">Sorry, {{data.message}}.</h1>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
